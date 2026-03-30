@@ -10,7 +10,7 @@ _<sup>1</sup>KAIST, <sup>2</sup>NAVER LABS_
 
 ## News
 
-- **[2026-03-29]**: Initial code release.
+- **[2026-03-30]**: Initial code release.
 
 ## Overview
 
