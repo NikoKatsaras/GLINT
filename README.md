@@ -1,10 +1,10 @@
 # GLINT: Modeling Scene-Scale Transparency via Gaussian Radiance Transport
 
-[![CVPR 2026](https://img.shields.io/badge/CVPR-2026-4b44ce.svg)](#) [![arXiv](https://img.shields.io/badge/arXiv-2603.26181-b31b1b.svg)](https://arxiv.org/abs/2603.26181) [![GLINT](https://img.shields.io/badge/GLINT-Project%20Page-blue.svg)](https://youngju-na.github.io/GLINT) [![Dataset](https://img.shields.io/badge/Data-Available-green)](https://drive.google.com/drive/folders/1NB_AuBQ5lP3pkdS9M-x9o0oqRrXP4S6a?usp=sharing)
+[![arXiv](https://img.shields.io/badge/arXiv-2603.26181-b31b1b.svg)](https://arxiv.org/abs/2603.26181) [![GLINT](https://img.shields.io/badge/GLINT-Project%20Page-blue.svg)](https://youngju-na.github.io/GLINT) [![Dataset](https://img.shields.io/badge/Dataset-Download-green.svg)](https://drive.google.com/drive/folders/1NB_AuBQ5lP3pkdS9M-x9o0oqRrXP4S6a?usp=sharing)
 
 Official code release for the paper: **GLINT: Modeling Scene-Scale Transparency via Gaussian Radiance Transport**.
 
-[Youngju Na](https://youngju-na.github.io/)<sup>1,2,*</sup>, [Jaeseong Yun](jaeseong.yun@naverlabs.com)<sup>2</sup>, [Soohyun Ryu](soohyun.ryu@naverlabs.com)<sup>2</sup>, [Hyunsu Kim](https://blandocs.github.io/)<sup>2</sup>, [Sung-Eui Yoon](https://sgvr.kaist.ac.kr/~sungeui/)<sup>1</sup>, [Suyong Yeon](suyong.yeon@naverlabs.com)<sup>2</sup>
+[Youngju Na](https://youngju-na.github.io/)<sup>1,2,*</sup>, [Jaeseong Yun](mailto:jaeseong.yun@naverlabs.com)<sup>2</sup>, [Soohyun Ryu](mailto:soohyun.ryu@naverlabs.com)<sup>2</sup>, [Hyunsu Kim](https://blandocs.github.io/)<sup>2</sup>, [Sung-Eui Yoon](https://sgvr.kaist.ac.kr/~sungeui/)<sup>1</sup>, [Suyong Yeon](mailto:suyong.yeon@naverlabs.com)<sup>2</sup>
 
 _<sup>1</sup>KAIST, <sup>2</sup>NAVER LABS_
 
