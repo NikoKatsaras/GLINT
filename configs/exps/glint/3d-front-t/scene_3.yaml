@@ -1,6 +1,6 @@
 configs:
     - configs/base.yaml # default arguments for the whole codebase
-    - configs/models/envgs.yaml # envgs model configuration
+    - configs/models/glint.yaml # model configuration
     - configs/datasets/manual_synthetic_GT_cam_points/scene_3.yaml # dataset usage configuration
 
 model_cfg:

@@ -104,6 +104,7 @@ class VolumetricVideoDataset(Dataset):
                  # Normal related configs
                  normals_dir: str = 'normals',
                  use_normals: bool = False,
+                 allow_missing_normals: bool = True,
                  
                  #! DiffusionRenderer related configs
                  diffren_dir: str = 'diffrens',  # for those methods who use DiffusionRenderer priors
@@ -265,6 +266,7 @@ class VolumetricVideoDataset(Dataset):
         self.use_smpls = use_smpls  # use smpls as a prior
         self.use_bkgds = use_bkgds  # use background images as a prior
         self.use_normals = use_normals  # use normals as a prior
+        self.allow_missing_normals = allow_missing_normals
         self.use_diffren = use_diffren  #! use DiffusionRenderer priors
         self.diffren_params = diffren_params  #! DiffusionRenderer parameters to use, can be empty list
         
@@ -478,12 +480,7 @@ class VolumetricVideoDataset(Dataset):
 
         # Normal image path preparation
         if self.use_normals:
-            self.nms = np.asarray([im.replace(self.images_dir, self.normals_dir) for im in self.ims.ravel()]).reshape(self.ims.shape)
-            if not exists(self.nms[0, 0]):
-                self.nms = np.asarray([nm.replace('.png', '.jpg') for nm in self.nms.ravel()]).reshape(self.nms.shape)
-            if not exists(self.nms[0, 0]):
-                self.nms = np.asarray([nm.replace('.jpg', '.png') for nm in self.nms.ravel()]).reshape(self.nms.shape)
-            self.nms_dir = join(*split(dirname(self.nms[0, 0]))[:-1])  # logging only
+            self.prepare_normal_paths()
             
         # DiffusionRenderer prior path preparation (adjusted to match folder structure)
         if self.use_diffren:
@@ -513,6 +510,29 @@ class VolumetricVideoDataset(Dataset):
             if not os.path.exists(self.bgs[0]):
                 self.bgs = np.asarray([bg.replace('.jpg', '.png') for bg in self.bgs])
             self.bgs_dir = join(*split(dirname(self.bgs[0]))[:-1])  # logging only
+
+    def disable_normal_loading(self, message: str):
+        if self.allow_missing_normals:
+            warn_once(message + f' Skipping normals from {join(self.data_root, self.normals_dir)}.')
+            self.use_normals = False
+        else:
+            raise FileNotFoundError(message + f' Expected normals under {join(self.data_root, self.normals_dir)}.')
+
+    def prepare_normal_paths(self):
+        nms = np.asarray([im.replace(self.images_dir, self.normals_dir) for im in self.ims.ravel()]).reshape(self.ims.shape)
+        nms_candidates = [
+            nms,
+            np.asarray([nm.replace('.png', '.jpg') for nm in nms.ravel()]).reshape(nms.shape),
+            np.asarray([nm.replace('.jpg', '.png') for nm in nms.ravel()]).reshape(nms.shape),
+        ]
+
+        for candidate in nms_candidates:
+            if exists(candidate[0, 0]):
+                self.nms = candidate
+                self.nms_dir = join(*split(dirname(self.nms[0, 0]))[:-1])  # logging only
+                return
+
+        self.disable_normal_loading('Could not find normal files for the dataset.')
             
 
     def load_bytes(self):

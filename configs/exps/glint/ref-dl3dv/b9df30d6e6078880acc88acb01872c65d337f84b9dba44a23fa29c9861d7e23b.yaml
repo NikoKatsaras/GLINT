@@ -1,6 +1,6 @@
 configs:
     - configs/base.yaml # default arguments for the whole codebase
-    - configs/models/envgs.yaml # envgs model configuration
+    - configs/models/glint.yaml # model configuration
     - configs/datasets/ref-dl3dv/b9df30d6e6078880acc88acb01872c65d337f84b9dba44a23fa29c9861d7e23b.yaml # dataset usage configuration
 
 model_cfg:
