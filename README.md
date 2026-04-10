@@ -124,6 +124,15 @@ evc-train -c configs/exps/glint/ref-dl3dv/<scene>.yaml \
   exp_name=glint/ref-dl3dv/<run_name>/<scene>
 ```
 
+For example, to train the scene `6b42314a2f8a18a193826e2b58e45729453e74524078283f740b8f8d330c3d2f`:
+
+```bash
+evc-train -c configs/exps/glint/ref-dl3dv/6b42314a2f8a18a193826e2b58e45729453e74524078283f740b8f8d330c3d2f.yaml \
+  exp_name=glint/ref-dl3dv/<run_name>/6b42314a2f8a18a193826e2b58e45729453e74524078283f740b8f8d330c3d2f
+```
+
+In this scene config, training uses `dataloader_cfg.dataset_cfg.view_sample`, which contains all view indices except multiples of 8.
+
 The default hyperparameters are defined in [`configs/models/glint.yaml`](configs/models/glint.yaml). Key parameters you may want to adjust depending on your scene:
 
 | Parameter | Default | Description |
@@ -142,6 +151,21 @@ Example evaluation command:
 evc-test -c configs/exps/glint/ref-dl3dv/<scene>.yaml \
   exp_name=glint/ref-dl3dv/<run_name>/<scene>
 ```
+
+For the same scene:
+
+```bash
+evc-test -c configs/exps/glint/ref-dl3dv/6b42314a2f8a18a193826e2b58e45729453e74524078283f740b8f8d330c3d2f.yaml \
+  exp_name=glint/ref-dl3dv/<run_name>/6b42314a2f8a18a193826e2b58e45729453e74524078283f740b8f8d330c3d2f
+```
+
+Evaluation uses `val_dataloader_cfg.dataset_cfg.view_sample`. For `6b42314a2f8a18a193826e2b58e45729453e74524078283f740b8f8d330c3d2f`, this is:
+
+```text
+[0, 8, 16, 24, ..., 320]
+```
+
+So this scene follows an every-8th-view evaluation split: 41 evaluation views and the remaining 282 views for training.
 
 ## Custom Rendering
 Example interpolation video rendering:
